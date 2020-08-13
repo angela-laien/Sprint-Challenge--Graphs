@@ -28,8 +28,22 @@ player = Player(world.starting_room)
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 traversal_path = []
+# create a compass for opposite directions
+c = {'n': 's', 'e': 'w', 's': 'n', 'w': 'e'}
 
-
+def explore_maze():
+    # store visited rooms
+    visited=[]
+    # store directions
+    path = []
+    # get available directions in starting room - use get_exist() from room.py
+    for direction in player.current_room.get_exits():
+        # make player move in available direction to a new room
+        player.travel(direction)
+        # check if current room has been visited
+        if player.current_room.id not in visited:
+            # add current room to the visited list
+            visited.append(player.current_room.id)
 
 # TRAVERSAL TEST - DO NOT MODIFY
 visited_rooms = set()
